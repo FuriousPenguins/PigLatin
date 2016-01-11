@@ -30,26 +30,24 @@ public String pigLatin(String sWord)
 //postcondition: returns the pig latin equivalent of sWord
 {
 	if(sWord.length() > 0) {
-		if(findFirstVowel(sWord) == -1)
-		{
-			return sWord + "ay";
+		if(sWord.charAt(0) == 'q' && sWord.charAt(1) == 'u') {
+			String newStr = sWord.substring(2,sWord.length());
+			newStr = newStr + "quay";
+			return newStr;
 		}
 		else if(findFirstVowel(sWord) == 0){
 			sWord = sWord + "way";
 			return sWord;
 		}
-		else if(findFirstVowel(sWord) > 0) {
-			char firstConsonant = sWord.charAt(0);
-			String newStr = sWord.substring(1,sWord.length());
-			newStr = newStr + firstConsonant;
-			return newStr;
+		else if(findFirstVowel(sWord) == -1)
+		{
+			return sWord + "ay";
 		}
-		if(sWord.length() >=2){
-			if(sWord.charAt(0) == 'q' && sWord.charAt(1) == 'u') {
-				String newStr = sWord.substring(2,sWord.length());
-				newStr = newStr + "quay";
-				return newStr;
-			}
+		else if(findFirstVowel(sWord) > 0) {
+			String leadingConsonants = sWord.substring(0,findFirstVowel(sWord));
+			String newStr = new String();
+			newStr = sWord.substring(findFirstVowel(sWord),sWord.length()) + leadingConsonants + "ay";
+			return newStr;
 		}
   }
   return "Error!";
